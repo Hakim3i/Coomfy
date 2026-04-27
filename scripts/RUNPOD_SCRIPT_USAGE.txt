@@ -1,18 +1,18 @@
-ComfySprites Runpod Script Usage
+Coomfy Runpod Script Usage
 ================================
 
 GitHub repo:
-https://github.com/Hakim3i/ComfySprites
+https://github.com/Hakim3i/Coomfy
 
 Script path in repo:
-scripts/runpod_setup_comfysprites.sh
+scripts/runpod_setup_coomfy.sh
 
 Option 0: always fetch latest setup script, pass app port (recommended on RunPod)
 --------------------------------------------------------------------------------
-Downloads runpod_setup_comfysprites.sh from main every time, then runs it with APP_PORT:
+Downloads runpod_setup_coomfy.sh from main every time, then runs it with APP_PORT:
 
-  curl -fsSL https://raw.githubusercontent.com/Hakim3i/ComfySprites/main/scripts/runpod_update_and_run.sh | bash -s -- 8890
-  curl -fsSL https://raw.githubusercontent.com/Hakim3i/ComfySprites/main/scripts/runpod_update_and_run.sh | bash -s -- 8890 http://127.0.0.1:8188
+  curl -fsSL https://raw.githubusercontent.com/Hakim3i/Coomfy/main/scripts/runpod_update_and_run.sh | bash -s -- 8890
+  curl -fsSL https://raw.githubusercontent.com/Hakim3i/Coomfy/main/scripts/runpod_update_and_run.sh | bash -s -- 8890 http://127.0.0.1:8188
 
 Or after clone, from repo root:
 
@@ -21,39 +21,39 @@ Or after clone, from repo root:
 
 Option 1: curl and run immediately
 ----------------------------------
-curl -fsSL https://raw.githubusercontent.com/Hakim3i/ComfySprites/main/scripts/runpod_setup_comfysprites.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Hakim3i/Coomfy/main/scripts/runpod_setup_coomfy.sh | bash
 
 
 Option 2: download script, make executable, then run
 ----------------------------------------------------
-curl -fsSL -o runpod_setup_comfysprites.sh https://raw.githubusercontent.com/Hakim3i/ComfySprites/main/scripts/runpod_setup_comfysprites.sh
-chmod +x runpod_setup_comfysprites.sh
-./runpod_setup_comfysprites.sh
+curl -fsSL -o runpod_setup_coomfy.sh https://raw.githubusercontent.com/Hakim3i/Coomfy/main/scripts/runpod_setup_coomfy.sh
+chmod +x runpod_setup_coomfy.sh
+./runpod_setup_coomfy.sh
 
 Pass ComfyUI URL as argument (recommended)
 ------------------------------------------
-./runpod_setup_comfysprites.sh http://127.0.0.1:8188
+./runpod_setup_coomfy.sh http://127.0.0.1:8188
 
 With app port + ComfyUI URL argument
 ------------------------------------
-APP_PORT=8890 ./runpod_setup_comfysprites.sh http://127.0.0.1:8188
+APP_PORT=8890 ./runpod_setup_coomfy.sh http://127.0.0.1:8188
 
 Show help
 ---------
-./runpod_setup_comfysprites.sh --help
+./runpod_setup_coomfy.sh --help
 
 Behavior on every run
 ---------------------
-- Stops any active ComfySprites process (`node server.js`) before updating.
+- Stops any active Coomfy process (`node server.js`) before updating.
 - Force syncs to latest GitHub `main` (`git reset --hard origin/main`).
 
 
 Run with custom ports / settings (example)
 ------------------------------------------
-APP_PORT=8890 COMFY_URL=http://127.0.0.1:8188 ./runpod_setup_comfysprites.sh
+APP_PORT=8890 COMFY_URL=http://127.0.0.1:8188 ./runpod_setup_coomfy.sh
 
 
 View logs
 ---------
-tail -f /workspace/ComfySprites/logs/comfysprites.log
+tail -f /workspace/Coomfy/logs/coomfy.log
 

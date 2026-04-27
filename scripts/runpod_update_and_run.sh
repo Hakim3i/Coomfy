@@ -1,27 +1,27 @@
 #!/usr/bin/env bash
-# Fetch the latest runpod_setup_comfysprites.sh from GitHub and execute it.
+# Fetch the latest runpod_setup_coomfy.sh from GitHub and execute it.
 # Use this on RunPod (or any Linux host) so you always run the current script without cloning first.
 set -euo pipefail
 
-RAW_URL="${RAW_URL:-https://raw.githubusercontent.com/Hakim3i/ComfySprites/main/scripts/runpod_setup_comfysprites.sh}"
-CACHED_SCRIPT="${CACHED_SCRIPT:-/tmp/runpod_setup_comfysprites.sh}"
+RAW_URL="${RAW_URL:-https://raw.githubusercontent.com/Hakim3i/Coomfy/main/scripts/runpod_setup_coomfy.sh}"
+CACHED_SCRIPT="${CACHED_SCRIPT:-/tmp/runpod_setup_coomfy.sh}"
 
 usage() {
   cat <<'EOF'
 Usage:
   ./runpod_update_and_run.sh <APP_PORT> [COMFY_URL]
 
-Downloads the latest scripts/runpod_setup_comfysprites.sh from GitHub (main), then runs it.
+Downloads the latest scripts/runpod_setup_coomfy.sh from GitHub (main), then runs it.
 
 Arguments:
-  APP_PORT   Port for the ComfySprites HTTP server (also use this port in RunPod "Expose HTTP".)
+  APP_PORT   Port for the Coomfy HTTP server (also use this port in RunPod "Expose HTTP".)
   COMFY_URL  Optional. Base URL of ComfyUI, e.g. http://127.0.0.1:8188
-             If omitted, the setup script uses its default (see runpod_setup_comfysprites.sh --help).
+             If omitted, the setup script uses its default (see runpod_setup_coomfy.sh --help).
 
 Examples:
   bash runpod_update_and_run.sh 8890
   bash runpod_update_and_run.sh 8890 http://127.0.0.1:8188
-  curl -fsSL https://raw.githubusercontent.com/Hakim3i/ComfySprites/main/scripts/runpod_update_and_run.sh | bash -s -- 8890 http://127.0.0.1:8188
+  curl -fsSL https://raw.githubusercontent.com/Hakim3i/Coomfy/main/scripts/runpod_update_and_run.sh | bash -s -- 8890 http://127.0.0.1:8188
 
 Optional environment (forwarded to the setup script):
   REPO_URL  REPO_DIR  BRANCH  COMFY_URL (used only when COMFY_URL arg is not given)
@@ -47,7 +47,7 @@ if ! [[ "$APP_PORT" =~ ^[0-9]+$ ]] || [[ "$APP_PORT" -lt 1 || "$APP_PORT" -gt 65
   exit 1
 fi
 
-echo "==> Downloading latest runpod_setup_comfysprites.sh"
+echo "==> Downloading latest runpod_setup_coomfy.sh"
 echo "    ${RAW_URL}"
 if ! command -v curl >/dev/null 2>&1; then
   echo "Error: curl is required." >&2
