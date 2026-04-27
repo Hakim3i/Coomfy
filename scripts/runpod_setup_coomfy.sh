@@ -66,14 +66,7 @@ fi
 
 echo "==> Node version: $(node -v)"
 echo "==> npm version:  $(npm -v)"
-
-if ! command -v python3 >/dev/null 2>&1; then
-  echo "==> Installing python3 + pip"
-  apt-get update
-  apt-get install -y python3 python3-pip
-fi
-
-echo "==> Python version: $(python3 --version)"
+CUSTOM_NODES_CHANGED=0
 
 install_or_update_custom_node() {
   local repo_url="$1"
@@ -87,15 +80,18 @@ install_or_update_custom_node() {
   if [ ! -d "${node_dir}/.git" ]; then
     echo "==> Installing custom node: ${repo_name}"
     git clone --depth 1 "${repo_url}" "${node_dir}"
+    CUSTOM_NODES_CHANGED=1
   else
     echo "==> Updating custom node: ${repo_name}"
+    local before_sha
+    local after_sha
+    before_sha="$(git -C "${node_dir}" rev-parse HEAD 2>/dev/null || true)"
     git -C "${node_dir}" fetch --all --prune
     git -C "${node_dir}" pull --ff-only || true
-  fi
-
-  if [ -f "${node_dir}/requirements.txt" ]; then
-    echo "==> Installing Python requirements for ${repo_name}"
-    python3 -m pip install -r "${node_dir}/requirements.txt"
+    after_sha="$(git -C "${node_dir}" rev-parse HEAD 2>/dev/null || true)"
+    if [ -n "${before_sha}" ] && [ -n "${after_sha}" ] && [ "${before_sha}" != "${after_sha}" ]; then
+      CUSTOM_NODES_CHANGED=1
+    fi
   fi
 }
 
@@ -134,6 +130,10 @@ git reset --hard "origin/${BRANCH}"
 echo "==> Ensuring required ComfyUI custom nodes"
 install_or_update_custom_node "https://github.com/Smirnov75/ComfyUI-mxToolkit.git" "ComfyUI-mxToolkit"
 install_or_update_custom_node "https://github.com/pythongosssss/ComfyUI-Custom-Scripts.git" "ComfyUI-Custom-Scripts"
+if [ "${CUSTOM_NODES_CHANGED}" -eq 1 ]; then
+  echo "==> Custom nodes were installed/updated."
+  echo "==> Please restart ComfyUI to load node changes."
+fi
 
 # -----------------------------
 # Install app dependencies
