@@ -8,7 +8,7 @@ Usage:
 
 Examples:
   ./runpod_setup_coomfy.sh http://127.0.0.1:8188
-  APP_PORT=8890 ./runpod_setup_coomfy.sh http://10.0.0.25:8188
+  APP_PORT=8190 ./runpod_setup_coomfy.sh http://10.0.0.25:8188
 
 Priority for COMFY_URL:
   1) First CLI argument
@@ -28,7 +28,7 @@ fi
 REPO_URL="${REPO_URL:-https://github.com/Hakim3i/Coomfy.git}"
 REPO_DIR="${REPO_DIR:-/workspace/Coomfy}"
 BRANCH="${BRANCH:-main}"
-APP_PORT="${APP_PORT:-8890}"
+APP_PORT="${APP_PORT:-8190}"
 COMFY_URL="${1:-${COMFY_URL:-http://127.0.0.1:8190}}"
 
 echo "==> Coomfy Runpod setup starting"

@@ -45,7 +45,7 @@ const spriteTypes = [
 const defaultSpriteType = 'character';
 
 module.exports = {
-  PORT: Number(process.env.PORT) || 3000,
+  PORT: Number(process.env.PORT) || 8190,
   /** Bind address. Use 0.0.0.0 for Docker/RunPod so the reverse proxy can reach the app. */
   HOST: process.env.HOST !== undefined && process.env.HOST !== '' ? process.env.HOST : '0.0.0.0',
   COMFY_URL: process.env.COMFY_URL || 'http://127.0.0.1:8188',

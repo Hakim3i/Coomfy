@@ -19,9 +19,9 @@ Arguments:
              If omitted, the setup script uses its default (see runpod_setup_coomfy.sh --help).
 
 Examples:
-  bash runpod_update_and_run.sh 8890
-  bash runpod_update_and_run.sh 8890 http://127.0.0.1:8188
-  curl -fsSL https://raw.githubusercontent.com/Hakim3i/Coomfy/main/scripts/runpod_update_and_run.sh | bash -s -- 8890 http://127.0.0.1:8188
+  bash runpod_update_and_run.sh 8190
+  bash runpod_update_and_run.sh 8190 http://127.0.0.1:8188
+  curl -fsSL https://raw.githubusercontent.com/Hakim3i/Coomfy/main/scripts/runpod_update_and_run.sh | bash -s -- 8190 http://127.0.0.1:8188
 
 Optional environment (forwarded to the setup script):
   REPO_URL  REPO_DIR  BRANCH  COMFY_URL (used only when COMFY_URL arg is not given)
