@@ -1,0 +1,45 @@
+{
+  "2": {
+    "inputs": {
+      "model": "RMBG-2.0",
+      "sensitivity": 1,
+      "process_res": 1280,
+      "mask_blur": 0,
+      "mask_offset": 0,
+      "invert_output": false,
+      "refine_foreground": true,
+      "background": "Color",
+      "background_color": "#000000",
+      "image": [
+        "3",
+        0
+      ]
+    },
+    "class_type": "RMBG",
+    "_meta": {
+      "title": "Remove Background (RMBG)"
+    }
+  },
+  "3": {
+    "inputs": {
+      "image": "cc69fd3b-fa53-4e4c-b915-4822026c2a73.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "First Frame"
+    }
+  },
+  "5": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "2",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  }
+}

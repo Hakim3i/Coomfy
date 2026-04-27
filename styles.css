@@ -1,0 +1,2930 @@
+:root {
+  /* Colors */
+  --bg: #0c0c0d;
+  --surface: #161618;
+  --surface-hover: #1c1c1f;
+  --border: #27272a;
+  --border-subtle: #1f1f22;
+  --text: #fafafa;
+  --text-muted: #a1a1aa;
+  --text-dim: #71717a;
+  --accent: #f59e0b;
+  --accent-hover: #d97706;
+  --accent-secondary: #22c55e;
+  --danger: #dc2626;
+  --danger-hover: #b91c1c;
+
+  /* Layout */
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.6);
+
+  /* Typography */
+  --font: 'Outfit', system-ui, sans-serif;
+
+  /* Timing */
+  --transition-fast: 0.15s;
+  --transition-normal: 0.2s;
+
+  /* Common Sizes */
+  --aspect-ratio-sprite: 768 / 1280;
+}
+
+/* ========================================
+   BASE STYLES
+   ======================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.5;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ========================================
+   SCROLLBAR
+   ======================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-dim);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) var(--bg);
+}
+
+/* ========================================
+   HEADER & NAVIGATION
+   ======================================== */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1rem 2rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.logo {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.tabs {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.tab {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color var(--transition-fast), background var(--transition-fast);
+}
+
+.tab:hover {
+  color: var(--text);
+  background: var(--surface-hover);
+}
+
+.tab.active {
+  color: var(--text);
+  background: var(--border);
+}
+
+.tab.tab-icon {
+  padding: 0.5rem;
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab.tab-icon svg {
+  flex-shrink: 0;
+}
+
+/* ========================================
+   LAYOUT
+   ======================================== */
+
+.main {
+  padding: 2rem;
+  margin: 0 auto;
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+
+.btn {
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background var(--transition-fast), transform 0.1s;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #0c0c0d;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.btn-secondary {
+  background: var(--surface-hover);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  border-color: var(--text-muted);
+  background: var(--border);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: var(--surface-hover);
+  color: var(--text);
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: #fff;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: var(--danger-hover);
+}
+
+.btn-small {
+  padding: 0.35rem 0.65rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.btn-icon {
+  padding: 0;
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.btn-icon-small {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(220, 38, 38, 0.2);
+  color: #ef4444;
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.btn-icon-small:hover {
+  background: var(--danger);
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.btn-full {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+/* ========================================
+   CARDS & GRID LAYOUTS
+   ======================================== */
+
+.cards,
+.videos-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  position: relative;
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow);
+  transition: border-color var(--transition-normal), box-shadow var(--transition-normal), transform 0.1s;
+  overflow: hidden;
+  aspect-ratio: var(--aspect-ratio-sprite);
+}
+
+.card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-4px);
+}
+
+/* Landscape sprite: keep card portrait-sized, fit full image inside (no crop) */
+.card.orientation-landscape .card-image img {
+  object-fit: contain;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+}
+
+.card-image img,
+.card-image video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.empty-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  background: linear-gradient(135deg, #161618 0%, #0c0c0d 100%);
+}
+
+/* Card Overlays */
+.card-overlay-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.card-overlay-top>* {
+  pointer-events: auto;
+}
+
+.card-overlay-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem 1rem 1rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.card-badge,
+.card-gender-badge {
+  padding: 0.3rem 0.6rem;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+
+.card-name {
+  margin: 0;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.card-lora-tag {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Add Card */
+.add-card,
+.edit-add-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--surface-hover);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: border-color var(--transition-normal), color var(--transition-normal), background var(--transition-normal);
+  aspect-ratio: var(--aspect-ratio-sprite);
+}
+
+.add-card {
+  gap: 1rem;
+}
+
+.add-card:hover,
+.edit-add-card:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.add-card:hover {
+  background: rgba(245, 158, 11, 0.05);
+  transform: translateY(-4px);
+}
+
+.add-card svg {
+  color: var(--text-dim);
+  transition: color var(--transition-normal);
+}
+
+.add-card:hover svg {
+  color: var(--accent);
+}
+
+.add-card span {
+  font-weight: 600;
+  color: var(--text-dim);
+  font-size: 1rem;
+}
+
+.add-card:hover span {
+  color: var(--text);
+}
+
+/* ========================================
+   EDIT TAB LAYOUT
+   ======================================== */
+
+.edit-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.edit-row {
+  display: flex;
+  align-items: flex-start;
+  padding: 1rem;
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-subtle);
+}
+
+.edit-row-cards {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 0.25rem 0;
+  flex: 1;
+  min-width: 0;
+}
+
+.edit-row-cards .card,
+.edit-row-cards .edit-card,
+.edit-row-cards .edit-main-card {
+  flex-shrink: 0;
+  width: 180px;
+  aspect-ratio: var(--aspect-ratio-sprite);
+}
+
+/* Landscape sprites in edit row: wider card to show full image */
+.edit-row-cards.orientation-landscape .card,
+.edit-row-cards.orientation-landscape .edit-card,
+.edit-row-cards.orientation-landscape .edit-main-card {
+  width: 300px;
+  aspect-ratio: 1280 / 768;
+}
+
+.edit-row-cards.orientation-landscape .edit-add-card {
+  width: 300px;
+  aspect-ratio: 1280 / 768;
+}
+
+.edit-card,
+.edit-main-card {
+  position: relative;
+}
+
+.edit-card .delete-edit {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 2;
+}
+
+.edit-add-card {
+  flex-shrink: 0;
+  width: 180px;
+}
+
+/* ========================================
+   ANIMATE TAB
+   ======================================== */
+
+.animate-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.animate-sprite-card {
+  cursor: pointer;
+}
+
+/* Landscape sprites in animate list: fit full image inside card */
+.animate-sprite-card.orientation-landscape .card-image img {
+  object-fit: contain;
+}
+
+/* Layout: same structure as make/edit — picker | preview | settings (portrait), preview full then picker | settings (landscape) */
+.animate-layout {
+  display: grid;
+  gap: 1.5rem;
+  min-height: 0;
+}
+
+/* Portrait: picker | preview | settings — same grid pattern as make/edit */
+.animate-layout.layout-portrait {
+  grid-template-columns: 180px 500px 300px;
+  grid-template-areas: "picker preview settings";
+  align-items: start;
+  width: max-content;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.animate-layout.layout-portrait .animate-bottom-section {
+  display: contents;
+}
+
+.animate-layout.layout-portrait .animate-preview-section {
+  grid-area: preview;
+  width: 500px;
+  min-width: 500px;
+  max-width: 500px;
+  min-height: 0;
+}
+
+.animate-layout.layout-portrait .animate-preview-section .image-placeholder {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  aspect-ratio: 768 / 1280;
+  height: auto;
+  flex: none;
+  min-height: 0;
+}
+
+.animate-layout.layout-portrait .animate-picker-section {
+  grid-area: picker;
+  width: 180px;
+  min-width: 0;
+}
+
+.animate-layout.layout-portrait .animate-image-picker {
+  flex-direction: column;
+}
+
+.animate-layout.layout-portrait .animate-settings-column {
+  grid-area: settings;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.animate-layout.layout-portrait .animate-settings-column .panel-actions {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.animate-layout.layout-portrait .animate-settings-panels {
+  min-width: 0;
+}
+
+/* Landscape: same as portrait — Picker | PREVIEW | Settings in one row */
+.animate-layout.layout-landscape {
+  grid-template-columns: 180px 768px 300px;
+  grid-template-areas: "picker preview settings";
+  align-items: start;
+  width: max-content;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.animate-layout.layout-landscape .animate-bottom-section {
+  display: contents;
+}
+
+.animate-layout.layout-landscape .animate-preview-section {
+  grid-area: preview;
+  width: 768px;
+  min-width: 768px;
+  max-width: 768px;
+  min-height: 0;
+}
+
+.animate-layout.layout-landscape .animate-preview-section .image-placeholder {
+  width: 100%;
+  max-width: 100%;
+}
+
+.animate-layout.layout-landscape .animate-picker-section {
+  grid-area: picker;
+  min-width: 0;
+}
+
+.animate-layout.layout-landscape .animate-settings-column {
+  grid-area: settings;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.animate-layout.layout-landscape .animate-settings-column .panel-actions {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.animate-layout.layout-landscape .animate-image-picker {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.animate-picker-section {
+  flex-shrink: 0;
+}
+
+.animate-select-hint {
+  color: var(--text-muted);
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+}
+
+.animate-image-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.animate-pick-card {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: var(--font);
+  color: var(--text);
+  transition: border-color var(--transition-normal), background var(--transition-normal);
+}
+
+.animate-pick-card:hover {
+  background: var(--surface-hover);
+  border-color: var(--text-dim);
+}
+
+.animate-pick-card.selected-first {
+  border-color: var(--accent);
+  background: var(--surface-hover);
+}
+
+.animate-pick-card.selected-last {
+  border-color: var(--accent-secondary);
+  background: var(--surface-hover);
+}
+
+.animate-pick-image {
+  width: 56px;
+  height: 56px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.animate-pick-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.animate-pick-card.orientation-landscape .animate-pick-image {
+  width: 72px;
+  height: 44px;
+}
+
+.animate-pick-card.orientation-landscape .animate-pick-image img {
+  object-fit: contain;
+}
+
+.animate-pick-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.animate-preview-section {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.animate-layout:not(.layout-portrait) .animate-preview-section .image-placeholder {
+  width: 100%;
+  flex: 1;
+  min-height: 220px;
+}
+
+.animate-settings-panels {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.animate-form-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.animate-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.animate-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0;
+}
+
+.animate-form input[type="text"] {
+  display: block;
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 0.95rem;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.animate-form input[type="text"]:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+}
+
+.animate-form input[type="text"]::placeholder {
+  color: var(--text-dim);
+}
+
+.animate-row-compact {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.animate-lora-field {
+  flex: 1;
+}
+
+.animate-frames-field {
+  flex: 2;
+}
+
+.animate-fps-field {
+  flex: 1;
+}
+
+.animate-fps-field input {
+  width: 100%;
+}
+
+.animate-checkboxes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.animate-checkboxes .checkbox-label {
+  margin-bottom: 0;
+}
+
+.animate-settings-column .panel-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.animate-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+}
+
+.image-placeholder .animate-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 900px) {
+
+  .animate-layout,
+  .animate-layout.layout-portrait,
+  .animate-layout.layout-landscape {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "preview"
+      "picker"
+      "settings";
+  }
+
+  .animate-layout .animate-picker-section,
+  .animate-layout .animate-preview-section,
+  .animate-layout .animate-settings-column {
+    grid-column: auto;
+    grid-row: auto;
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+  }
+
+  .animate-layout.layout-portrait .animate-preview-section {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .animate-layout.layout-portrait .animate-picker-section {
+    width: 100%;
+  }
+
+  .animate-layout .animate-image-picker {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .animate-layout.layout-portrait .animate-preview-section .image-placeholder {
+    width: 100%;
+    max-width: 768px;
+    height: auto;
+    max-height: min(1280px, 80vh);
+    aspect-ratio: 768 / 1280;
+  }
+
+  .animate-preview-section .image-placeholder {
+    min-height: 200px;
+  }
+
+  .animate-row-compact {
+    flex-wrap: wrap;
+  }
+}
+
+/* ========================================
+   FULL-PAGE PANELS (Make / Edit)
+   ======================================== */
+
+.full-page-panel {
+  display: grid;
+  grid-template-columns: max-content;
+  grid-template-rows: auto 1fr;
+  justify-content: center;
+  align-content: start;
+  height: 100%;
+  overflow-y: auto;
+  padding: 1rem 1.5rem 2rem;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  flex-shrink: 0;
+}
+
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.95rem;
+}
+
+.btn-back svg {
+  flex-shrink: 0;
+}
+
+.panel-header .panel-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #FAFAFA;
+}
+
+.panel-form.modal-form {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  width: 100%;
+  min-width: 0;
+}
+
+.panel-actions {
+  flex-shrink: 0;
+  margin-top: 1.25rem;
+  padding-top: 0.5rem;
+}
+
+/* ========================================
+   MODALS
+   ======================================== */
+
+.modal {
+  border: none;
+  border-radius: var(--radius);
+  padding: 0;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+  max-width: 90vw;
+  width: 900px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+
+.modal::backdrop {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+.modal-form {
+  padding: 1.75rem;
+}
+
+.modal-form h2 {
+  margin: 0 0 1.5rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding-top: 0.5rem;
+}
+
+/* ========================================
+   FORMS
+   ======================================== */
+
+.form-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .form-layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* ========================================
+   MAKE MODAL LAYOUT
+   ======================================== */
+
+#make-sprite-modal.modal {
+  width: 1100px;
+  max-width: 95vw;
+}
+
+.make-layout {
+  display: grid;
+  gap: 1.5rem;
+  /* Default grid area/columns setup overridden by specific layout classes */
+}
+
+/* Portrait Layout: Inputs | Preview | Settings */
+/* Same fixed preview width (500px) as edit layout so preview section size matches */
+.make-layout.layout-portrait {
+  grid-template-columns: 280px 500px 340px;
+  grid-template-areas: "inputs preview settings";
+  align-items: start;
+  width: max-content;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.make-layout.layout-portrait .make-bottom-section {
+  display: contents;
+}
+
+.make-layout.layout-portrait .make-preview-section {
+  grid-area: preview;
+  width: 500px;
+  min-width: 500px;
+  max-width: 500px;
+  min-height: 0;
+  z-index: 1;
+}
+
+.make-layout.layout-portrait .make-form-inputs {
+  grid-area: inputs;
+  min-width: 0;
+}
+
+.make-layout.layout-portrait .make-settings-column {
+  grid-area: settings;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.make-layout.layout-portrait .make-settings-column .panel-actions {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.make-layout.layout-portrait .make-settings-panels {
+  min-width: 0;
+}
+
+/* Landscape Layout: Preview (Full) | Inputs | Settings */
+/* Landscape: same as portrait — GD | PREVIEW | GS in one row */
+.make-layout.layout-landscape {
+  grid-template-columns: 280px 768px 340px;
+  grid-template-areas: "inputs preview settings";
+  align-items: start;
+  width: max-content;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.make-layout.layout-landscape .make-bottom-section {
+  display: contents;
+}
+
+.make-layout.layout-landscape .make-preview-section {
+  grid-area: preview;
+  width: 768px;
+  min-width: 768px;
+  max-width: 768px;
+  min-height: 0;
+}
+
+.make-layout.layout-landscape .make-preview-section .image-placeholder {
+  width: 100%;
+  max-width: 100%;
+}
+
+.make-layout.layout-landscape .make-form-inputs {
+  grid-area: inputs;
+  min-width: 0;
+}
+
+.make-layout.layout-landscape .make-settings-column {
+  grid-area: settings;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.make-layout.layout-landscape .make-settings-column .panel-actions {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/* Common Child Styles */
+.make-preview-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.make-preview-section .image-placeholder {
+  width: 100%;
+  /* Size is controlled by orientation class and max-width/height */
+}
+
+.make-preview-section .image-placeholder.orientation-portrait {
+  width: 100%;
+  max-width: 100%;
+  /* Allow it to fill the column */
+  aspect-ratio: 768 / 1280;
+  max-height: 85vh;
+}
+
+.make-preview-section .image-placeholder.orientation-landscape {
+  max-width: 500px;
+  aspect-ratio: 1280 / 768;
+}
+
+.make-form-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.make-settings-panels {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.make-settings-column .editor-panel .color-picker-row {
+  flex-wrap: nowrap;
+}
+
+.make-settings-column .editor-panel .color-picker-row .segmented-control-small {
+  flex-shrink: 0;
+}
+
+.make-settings-column .editor-panel .color-picker-row .color-picker-container {
+  flex-shrink: 0;
+}
+
+.make-settings-column .editor-panel .color-picker-row .color-value {
+  white-space: nowrap;
+}
+
+/* Responsive Fallback */
+@media (max-width: 1000px) {
+  .make-layout.layout-portrait {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "preview"
+      "inputs"
+      "settings";
+  }
+
+  .make-layout.layout-landscape {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "preview"
+      "inputs"
+      "settings";
+  }
+
+  .make-preview-section .image-placeholder {
+    max-width: 100%;
+  }
+}
+
+.make-row-compact {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-end;
+}
+
+.make-name-field {
+  margin-bottom: 0;
+}
+
+.make-type-field,
+.make-gender-field {
+  flex: 1;
+  min-width: 0;
+}
+
+.make-seed-field {
+  margin-bottom: 0;
+}
+
+.make-lora-field {
+  margin-bottom: 0;
+}
+
+.make-seed-field .input-group {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.make-seed-field .input-group input {
+  flex: 1;
+  min-width: 60px;
+}
+
+.make-seed-field .input-group .btn-icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+
+/* ========================================
+   EDIT MODAL LAYOUT
+   ======================================== */
+
+#edit-modal.modal {
+  width: 1100px;
+  max-width: 95vw;
+}
+
+.edit-layout {
+  display: grid;
+  gap: 1.5rem;
+}
+
+/* Portrait: inputs | preview | settings — fixed column widths so middle does not expand/compress */
+.edit-layout.layout-portrait {
+  grid-template-columns: 280px 500px 340px;
+  grid-template-areas: "inputs preview settings";
+  align-items: start;
+  width: max-content;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.edit-layout.layout-portrait .edit-bottom-section {
+  display: contents;
+}
+
+.edit-layout.layout-portrait .edit-preview-section {
+  grid-area: preview;
+  width: 500px;
+  min-width: 500px;
+  max-width: 500px;
+  min-height: 0;
+}
+
+.edit-layout.layout-portrait .edit-form-inputs {
+  grid-area: inputs;
+  min-width: 0;
+}
+
+.edit-layout.layout-portrait .edit-settings-column {
+  grid-area: settings;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.edit-layout.layout-portrait .edit-settings-column .panel-actions {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.edit-layout.layout-portrait .edit-settings-panels {
+  min-width: 0;
+}
+
+/* Landscape: same as portrait — GD | PREVIEW | GS in one row */
+.edit-layout.layout-landscape {
+  grid-template-columns: 280px 768px 340px;
+  grid-template-areas: "inputs preview settings";
+  align-items: start;
+  width: max-content;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.edit-layout.layout-landscape .edit-bottom-section {
+  display: contents;
+}
+
+.edit-layout.layout-landscape .edit-preview-section {
+  grid-area: preview;
+  width: 768px;
+  min-width: 768px;
+  max-width: 768px;
+  min-height: 0;
+}
+
+.edit-layout.layout-landscape .edit-preview-section .image-placeholder {
+  width: 100%;
+  max-width: 100%;
+}
+
+.edit-layout.layout-landscape .edit-form-inputs {
+  grid-area: inputs;
+  min-width: 0;
+}
+
+.edit-layout.layout-landscape .edit-settings-column {
+  grid-area: settings;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.edit-layout.layout-landscape .edit-settings-column .panel-actions {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/* Common Styles */
+.edit-preview-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.edit-preview-section .image-placeholder {
+  width: 100%;
+}
+
+.edit-preview-section .image-placeholder.orientation-portrait {
+  max-width: 500px;
+  aspect-ratio: 768 / 1280;
+}
+
+.edit-preview-section .image-placeholder.orientation-landscape {
+  max-width: 500px;
+  aspect-ratio: 1280 / 768;
+}
+
+.edit-form-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.edit-settings-panels {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.edit-settings-column .editor-panel .color-picker-row {
+  flex-wrap: nowrap;
+}
+
+.edit-settings-column .editor-panel .color-picker-row .segmented-control-small {
+  flex-shrink: 0;
+}
+
+.edit-settings-column .editor-panel .color-picker-row .color-picker-container {
+  flex-shrink: 0;
+}
+
+.edit-settings-column .editor-panel .color-picker-row .color-value {
+  white-space: nowrap;
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+
+  .edit-layout.layout-portrait,
+  .edit-layout.layout-landscape {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "preview"
+      "inputs"
+      "settings";
+  }
+}
+
+.edit-row-compact {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-end;
+}
+
+.edit-source-field,
+.edit-name-field,
+.edit-seed-field,
+.edit-lora-field {
+  flex: 1;
+}
+
+.edit-seed-field .input-group {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.edit-seed-field .input-group input {
+  flex: 1;
+  min-width: 60px;
+}
+
+.edit-seed-field .input-group .btn-icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+
+/* Shared form styles */
+.modal-form label,
+.animate-form label {
+  display: block;
+  margin-bottom: 1.25rem;
+}
+
+.animate-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.animate-form label.checkbox-label {
+  flex-direction: row;
+}
+
+.label-text {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+
+.label-text em {
+  font-style: normal;
+  font-weight: 400;
+  color: var(--text-dim);
+}
+
+/* Form inputs */
+.modal-form input,
+.modal-form select,
+.modal-form textarea,
+.animate-form select,
+.animate-form textarea,
+.animate-form input[type="text"],
+.animate-form input[type="number"] {
+  display: block;
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 0.95rem;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.animate-form select,
+.animate-form textarea,
+.animate-form input[type="text"],
+.animate-form input[type="number"] {
+  padding: 0.6rem 0.8rem;
+}
+
+.modal-form input:focus,
+.modal-form select:focus,
+.modal-form textarea:focus,
+.animate-form select:focus,
+.animate-form textarea:focus,
+.animate-form input[type="text"]:focus,
+.animate-form input[type="number"]:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+}
+
+.modal-form input::placeholder,
+.modal-form textarea::placeholder,
+.animate-form textarea::placeholder,
+.animate-form input[type="text"]::placeholder,
+.animate-form input[type="number"]::placeholder {
+  color: var(--text-dim);
+}
+
+.modal-form textarea,
+.animate-form textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+/* Hide number input spinners */
+.modal-form input[type="number"]::-webkit-inner-spin-button,
+.modal-form input[type="number"]::-webkit-outer-spin-button,
+.animate-form input[type="number"]::-webkit-inner-spin-button,
+.animate-form input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.modal-form input[type="number"],
+.animate-form input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Input groups */
+.input-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.input-group input {
+  flex: 1;
+}
+
+.input-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.input-row label {
+  margin-bottom: 0;
+}
+
+.input-col-grow {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+/* Range input */
+.animate-form input[type="range"] {
+  padding: 0;
+  border: none;
+}
+
+.animate-form output {
+  font-weight: 600;
+  margin-left: 0.25rem;
+}
+
+/* Checkboxes */
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  cursor: pointer;
+  accent-color: #71717a;
+}
+
+.checkbox-label .label-text {
+  margin-bottom: 0 !important;
+  color: #a1a1aa !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+}
+
+/* ========================================
+   TITLES & HEADINGS
+   ======================================== */
+
+.preview-title,
+.form-section-title,
+.settings-title {
+  margin: 0 0 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.preview-title {
+  margin-bottom: 1rem;
+}
+
+.settings-title {
+  margin-bottom: 1.25rem;
+}
+
+/* ========================================
+   SETTINGS & CONTROLS
+   ======================================== */
+
+.preview-row {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  margin-top: 0.75rem;
+}
+
+.preview-row .image-placeholder {
+  flex: 1;
+  min-width: 0;
+}
+
+.preview-row .generation-settings {
+  flex-shrink: 0;
+  width: 340px;
+}
+
+#edit-modal .preview-row {
+  margin-top: 0.75rem;
+}
+
+@media (max-width: 700px) {
+  .preview-row {
+    flex-direction: column;
+  }
+
+  .preview-row .generation-settings {
+    width: 100%;
+  }
+}
+
+.generation-settings {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  background: var(--surface-hover);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+#edit-modal .form-preview .generation-settings {
+  margin-top: 0;
+}
+
+.setting-item {
+  margin-bottom: 1.25rem;
+}
+
+.setting-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Segmented Control */
+.segmented-control {
+  display: flex;
+  background: var(--bg);
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
+.segment {
+  flex: 1;
+  position: relative;
+  cursor: pointer;
+  margin-bottom: 0 !important;
+}
+
+.segment input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.segment-label {
+  display: block;
+  text-align: center;
+  padding: 0.65rem 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  border-radius: calc(var(--radius-sm) - 2px);
+  transition: all var(--transition-normal);
+}
+
+.segment:hover .segment-label {
+  color: var(--text-muted);
+}
+
+.segment input:checked+.segment-label {
+  background: var(--accent);
+  color: #0c0c0d;
+}
+
+/* Color Picker */
+.color-picker-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.color-picker-row .color-picker-container {
+  flex: 0 0 auto;
+}
+
+.rmbg-group {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.setting-item>.rmbg-group {
+  margin-top: 0.5rem;
+}
+
+.rmbg-group .btn {
+  flex-shrink: 0;
+}
+
+.color-picker-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--bg);
+  padding: 0.65rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
+.color-picker-container input[type="color"] {
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 6px;
+  background: none;
+  cursor: pointer;
+}
+
+.color-picker-container input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.color-picker-container input[type="color"]::-webkit-color-swatch {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.color-value {
+  font-family: monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+/* ========================================
+   IMAGE PLACEHOLDER & PREVIEW
+   ======================================== */
+
+.image-placeholder {
+  width: 100%;
+  aspect-ratio: var(--aspect-ratio-sprite);
+  background: var(--bg);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  font-weight: 500;
+  font-size: 1rem;
+  user-select: none;
+  overflow: hidden;
+  gap: 1rem;
+  position: relative;
+}
+
+/* Make modal: landscape orientation uses wider preview so image is not cropped */
+#sprite-preview-placeholder.orientation-landscape {
+  aspect-ratio: 1280 / 768;
+}
+
+/* Edit modal: landscape orientation uses wider preview */
+#edit-preview-placeholder.orientation-landscape {
+  aspect-ratio: 1280 / 768;
+}
+
+/* Animate tab: landscape orientation uses wider preview */
+#animate-preview-placeholder.orientation-landscape {
+  aspect-ratio: 1280 / 768;
+}
+
+
+.image-placeholder .poll-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1.25rem;
+  border-radius: var(--radius);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.image-placeholder .preview-ready {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* Edit tab: pan/zoom transform wrapper for accurate positioning */
+#edit-preview-placeholder .edit-pan-zoom-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center center;
+}
+
+#edit-preview-placeholder .edit-pan-zoom-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: auto;
+}
+
+.image-placeholder .ready-badge {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  color: #4ade80;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(74, 222, 128, 0.2);
+}
+
+.image-placeholder .ready-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: #4ade80;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #4ade80;
+}
+
+.image-placeholder .source-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.preview-controls {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.overlay-slider-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.overlay-slider-container>.label-text {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.overlay-slider-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.overlay-percent {
+  font-variant-numeric: tabular-nums;
+  min-width: 2.25ch;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.overlay-percent-suffix {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.overlay-slider-row input[type="range"] {
+  flex: 1;
+  min-width: 0;
+  margin: 0 8px;
+  padding: 0;
+  box-sizing: content-box;
+}
+
+/* Keep thumb within track at 0% and 100%: thumb is ~16px, so inset track by half */
+.overlay-slider-row input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+}
+
+.overlay-slider-row input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  margin-top: -5px;
+}
+
+.overlay-slider-row input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  border: none;
+}
+
+.overlay-slider-row input[type="range"]::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 3px;
+}
+
+.overlay-slider-row input[type="range"]::-moz-range-track {
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+}
+
+.zoom-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.zoom-controls>.label-text {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.zoom-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.zoom-value {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  min-width: 3rem;
+  text-align: center;
+}
+
+/* Edit Settings Panels - separate sections like frame-editor */
+
+.edit-settings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.edit-settings-header .settings-title {
+  margin: 0;
+}
+
+.edit-history-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+}
+
+.edit-history-buttons .btn-icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.setting-section {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.setting-section:last-of-type {
+  border-bottom: none;
+}
+
+.setting-section-title {
+  margin: 0 0 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.transform-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.transform-row .btn-small {
+  flex: 1;
+}
+
+.transform-row .input-select-small {
+  width: auto;
+  min-width: 70px;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.85rem;
+}
+
+.filter-slider {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.filter-slider:last-child {
+  margin-bottom: 0;
+}
+
+.filter-slider .filter-label {
+  flex: 0 0 70px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.filter-slider input[type="range"] {
+  flex: 1;
+  min-width: 0;
+  height: 4px;
+  padding-top: 0;
+  padding-bottom: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--border);
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.filter-slider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+}
+
+.filter-slider input[type="range"]::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  border: none;
+}
+
+.filter-slider output {
+  flex: 0 0 28px;
+  text-align: right;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.filter-slider span {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+/* Toggle button active state (e.g. Pan) - blue when on */
+.btn-toggle.active {
+  background: #3b82f6;
+  color: #fff;
+  border-color: #3b82f6;
+}
+
+.btn-toggle.active:hover {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+/* ========================================
+   SETTINGS TAB
+   ======================================== */
+
+.tab-panel.settings-tab-centered.active {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.settings-panel {
+  max-width: 720px;
+  width: 100%;
+}
+
+.settings-title-main {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.settings-description {
+  margin: 0 0 1.5rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.settings-description code {
+  background: var(--surface-hover);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.settings-form .editor-panel {
+  margin-bottom: 0;
+}
+
+.settings-form .panel-actions {
+  margin-top: 0.5rem;
+}
+
+.settings-form input[type="text"],
+.settings-form input[type="number"],
+.settings-form select,
+.settings-form textarea {
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 0.95rem;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.settings-form input[type="text"]:focus,
+.settings-form input[type="number"]:focus,
+.settings-form select:focus,
+.settings-form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+}
+
+.settings-form input::placeholder,
+.settings-form textarea::placeholder {
+  color: var(--text-dim);
+}
+
+.settings-form .input-text-inline {
+  width: 8ch;
+  min-width: 8ch;
+  padding: 0.5rem 0.65rem;
+  font-family: monospace;
+  font-size: 0.95rem;
+}
+
+.settings-form .color-picker-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.settings-form .color-picker-row input[type="color"] {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.settings-size-presets {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.settings-size-presets-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.settings-size-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+}
+
+.settings-size-label {
+  min-width: 4.5em;
+  flex-shrink: 0;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.settings-size-times {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.settings-size-row input[type="number"] {
+  width: 7ch;
+  min-width: 7ch;
+  padding: 0.65rem 0.75rem;
+  font-variant-numeric: tabular-nums;
+  font-size: 1rem;
+}
+
+.label-hint {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-bottom: 0.75rem;
+}
+
+.settings-json {
+  font-family: monospace;
+  font-size: 0.85rem;
+  resize: vertical;
+  min-height: 80px;
+}
+
+.settings-status {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-left: 0.75rem;
+}
+
+.settings-status-error {
+  color: var(--danger);
+}
+
+/* ========================================
+   UTILITIES
+   ======================================== */
+
+.flipped,
+.card-image img.flipped,
+.image-placeholder img.flipped {
+  transform: scaleX(-1);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(245, 158, 11, 0.1);
+  border-top: 4px solid var(--accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px dashed var(--border);
+}
+
+/* ========================================
+   VIDEO CARD SPECIFIC
+   ======================================== */
+
+.video-card .card-overlay-top {
+  justify-content: flex-end;
+  z-index: 5;
+}
+
+.video-card .card-image.video-card-video {
+  position: relative;
+}
+
+.video-card-prompt {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.video-card-date {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin-top: 0.25rem;
+  display: block;
+}
+
+/* ========================================
+   FRAME EDITOR
+   ======================================== */
+
+.frame-editor-layout {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 80px);
+  gap: 1rem;
+}
+
+.frame-editor-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 0;
+}
+
+.frame-editor-header h2 {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #FAFAFA;
+}
+
+.editor-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.editor-header-actions .btn-icon {
+  flex-shrink: 0;
+  min-width: 42px;
+  min-height: 42px;
+}
+
+.frame-editor-main {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 1.5rem;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.frame-preview-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 0;
+}
+
+.frame-canvas-container {
+  position: relative;
+  flex: 1;
+  background: var(--bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#frame-canvas {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.frame-canvas-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: rgba(0, 0, 0, 0.7);
+  color: var(--text-muted);
+}
+
+.frame-deleted-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(220, 38, 38, 0.3);
+  pointer-events: none;
+}
+
+.frame-deleted-overlay span {
+  padding: 0.75rem 1.5rem;
+  background: var(--danger);
+  color: white;
+  font-weight: 700;
+  font-size: 1.25rem;
+  border-radius: var(--radius);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Timeline */
+.timeline-section {
+  padding: 0.5rem 0;
+}
+
+.frame-timeline {
+  display: flex;
+  gap: 2px;
+  padding: 0.75rem;
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.timeline-frame {
+  height: 32px;
+  background: var(--accent);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.timeline-frame:hover {
+  background: var(--accent-hover);
+  transform: scaleY(1.1);
+}
+
+.timeline-frame.current {
+  background: var(--text);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+.timeline-frame.rmbg {
+  background: var(--accent-secondary);
+}
+
+.timeline-frame.rmbg.current {
+  background: var(--accent-secondary);
+  box-shadow: 0 0 0 2px var(--text);
+}
+
+.timeline-frame.deleted {
+  background: var(--border);
+  opacity: 0.5;
+}
+
+.timeline-frame.deleted.current {
+  background: var(--danger);
+  opacity: 1;
+}
+
+/* Playback Controls */
+.playback-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
+.frame-counter-group {
+  margin-left: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+#frame-counter {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.deleted-counter {
+  color: var(--danger);
+  font-size: 0.85rem;
+}
+
+/* Editor Sidebar */
+.frame-editor-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.editor-panel {
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 1rem;
+}
+
+.panel-title {
+  margin: 0 0 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.editor-panel label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.75rem;
+}
+
+.editor-panel label:last-child {
+  margin-bottom: 0;
+}
+
+.editor-panel .label-text {
+  margin-bottom: 0;
+  font-size: 0.85rem;
+}
+
+.editor-panel input[type="range"] {
+  width: 100%;
+  height: 6px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--border);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.editor-panel input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+}
+
+.editor-panel input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  border: none;
+}
+
+.editor-panel input[type="text"],
+.editor-panel input[type="number"] {
+  padding: 0.65rem 0.9rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 0.95rem;
+}
+
+.editor-panel input[type="text"]:focus,
+.editor-panel input[type="number"]:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+}
+
+/* Hide number input spinners */
+.editor-panel input[type="number"]::-webkit-inner-spin-button,
+.editor-panel input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.editor-panel input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Select styling to match site */
+.editor-panel select {
+  padding: 0.65rem 0.9rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 0.95rem;
+  cursor: pointer;
+  width: 100%;
+}
+
+.editor-panel select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+}
+
+/* Checkbox label inline */
+.editor-panel .checkbox-label {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.editor-panel .checkbox-label .label-text {
+  margin-bottom: 0;
+}
+
+.transform-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.transform-buttons .btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.filter-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+.filter-actions .btn {
+  flex: 1;
+}
+
+.rmbg-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.rmbg-actions .btn {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Small segmented control variant for editor panels */
+.segmented-control-small {
+  padding: 3px;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.segmented-control-small .segment {
+  flex: 0 1 auto;
+}
+
+.segmented-control-small .segment-label {
+  padding: 0.45rem 0.75rem;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+/* Editor panel setting item */
+.editor-panel .setting-item {
+  margin-bottom: 0.75rem;
+}
+
+.editor-panel .setting-item:last-child {
+  margin-bottom: 0;
+}
+
+.editor-panel .setting-item>.label-text {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* Columns : X  Rows : Y grouped row */
+.editor-panel .columns-rows-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.editor-panel .columns-rows-row .columns-rows-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1;
+  min-width: 0;
+  margin-bottom: 0;
+}
+
+.editor-panel .columns-rows-row .rows-value {
+  padding: 0.65rem 0.9rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-muted, var(--bg));
+  color: var(--text);
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.editor-panel .color-picker-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: nowrap;
+}
+
+.editor-panel .color-picker-row .segmented-control-small {
+  flex-shrink: 0;
+}
+
+.editor-panel .color-picker-row .color-picker-container {
+  flex-shrink: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.editor-panel .color-picker-row .color-value {
+  white-space: nowrap;
+}
+
+.spritesheet-preview {
+  margin: 0.75rem 0;
+  padding: 0.75rem;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
+.preview-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.preview-info p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.preview-info strong {
+  color: var(--text);
+}
+
+/* Progress Modal */
+.progress-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+}
+
+.progress-content {
+  background: var(--surface);
+  padding: 2rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  min-width: 300px;
+  text-align: center;
+}
+
+.progress-content h3 {
+  margin: 0 0 1.5rem;
+  font-size: 1.1rem;
+}
+
+.progress-bar-container {
+  height: 8px;
+  background: var(--bg);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.export-progress-spinner-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  min-height: 48px;
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 4px;
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+.progress-content p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* Video card clickable */
+.video-card {
+  cursor: pointer;
+}
+
+.video-card:hover .card-overlay-bottom {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 50%, transparent 100%);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .frame-editor-main {
+    grid-template-columns: 1fr;
+    overflow-y: auto;
+  }
+
+  .frame-preview-section {
+    min-height: 400px;
+  }
+
+  .frame-editor-sidebar {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .editor-panel {
+    flex: 1;
+    min-width: 280px;
+  }
+}

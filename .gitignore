@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+
+# Data and generated files
+data/
+outputs/
+temp_export/
+test/
+tests/
+tmp/
+temp/
+coverage/
+
+# Legacy directories (deprecated, use sprites now)
+data/characters/
+data/characters.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local

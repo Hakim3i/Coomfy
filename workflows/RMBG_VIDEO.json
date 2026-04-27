@@ -1,0 +1,76 @@
+{
+  "2": {
+    "inputs": {
+      "model": "RMBG-2.0",
+      "sensitivity": 1,
+      "process_res": 1280,
+      "mask_blur": 0,
+      "mask_offset": 0,
+      "invert_output": false,
+      "refine_foreground": true,
+      "background": "Alpha",
+      "background_color": "#000000",
+      "image": [
+        "22",
+        0
+      ]
+    },
+    "class_type": "RMBG",
+    "_meta": {
+      "title": "Remove Background (RMBG)"
+    }
+  },
+  "22": {
+    "inputs": {
+      "video": "d74b5efa-857b-4c06-b45a-78e0c18a88cd.mp4",
+      "force_rate": 0,
+      "custom_width": 0,
+      "custom_height": 0,
+      "frame_load_cap": 0,
+      "skip_first_frames": 0,
+      "select_every_nth": 1,
+      "format": "AnimateDiff"
+    },
+    "class_type": "VHS_LoadVideo",
+    "_meta": {
+      "title": "Load Video (Upload) 🎥🅥🅗🅢"
+    }
+  },
+  "24": {
+    "inputs": {
+      "frame_rate": [
+        "25",
+        0
+      ],
+      "loop_count": 0,
+      "filename_prefix": "",
+      "format": "video/h264-mp4",
+      "pix_fmt": "yuv420p",
+      "crf": 4,
+      "save_metadata": false,
+      "trim_to_audio": false,
+      "pingpong": false,
+      "save_output": true,
+      "images": [
+        "2",
+        0
+      ]
+    },
+    "class_type": "VHS_VideoCombine",
+    "_meta": {
+      "title": "Full video"
+    }
+  },
+  "25": {
+    "inputs": {
+      "video_info": [
+        "22",
+        3
+      ]
+    },
+    "class_type": "VHS_VideoInfo",
+    "_meta": {
+      "title": "Video Info 🎥🅥🅗🅢"
+    }
+  }
+}

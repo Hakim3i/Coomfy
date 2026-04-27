@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coomfy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <header class="header">
+    <h1 class="logo">Coomfy</h1>
+    <nav class="tabs">
+      <button type="button" class="tab active" data-tab="make">Make</button>
+      <button type="button" class="tab" data-tab="edit">Edit</button>
+      <button type="button" class="tab" data-tab="animate">Animate</button>
+      <button type="button" class="tab" data-tab="videos">Export</button>
+      <button type="button" class="tab tab-icon" data-tab="settings" title="Settings" aria-label="Settings">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-1.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h1.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v1.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-1.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+      </button>
+    </nav>
+  </header>
+
+  <main class="main">
+    <section id="make-tab" class="tab-panel active">
+      <div class="make-list-view" id="make-list-view">
+        <div class="cards" id="make-cards"></div>
+      </div>
+      <div class="full-page-panel hidden" id="make-detail-view">
+        <div class="panel-header">
+          <button type="button" class="btn btn-ghost btn-icon" id="make-back" title="Back" aria-label="Back">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 12H5" />
+              <path d="M12 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <h2 class="panel-title" id="make-panel-title">New Character</h2>
+        </div>
+        <form id="make-sprite-form" class="panel-form modal-form">
+          <div class="make-layout">
+            <div class="make-preview-section">
+              <div class="image-placeholder" id="sprite-preview-placeholder">
+                <span>768 × 1280</span>
+              </div>
+            </div>
+            <div class="make-bottom-section">
+              <div class="make-form-inputs">
+                <h3 class="form-section-title">Generation Data</h3>
+                <label class="make-name-field">
+                  <span class="label-text">Name</span>
+                  <input type="text" name="name" placeholder="e.g. Sarah" required>
+                </label>
+                <div class="make-row-compact">
+                  <label class="make-type-field">
+                    <span class="label-text">Type</span>
+                    <select name="type" id="make-sprite-type" required>
+                      <option value="character">Character</option>
+                    </select>
+                  </label>
+                  <label class="make-gender-field">
+                    <span class="label-text">Gender</span>
+                    <select name="gender" id="make-gender-select">
+                      <option value="female">Female</option>
+                      <option value="male">Male</option>
+                    </select>
+                  </label>
+                </div>
+                <label>
+                  <span class="label-text">Prompt</span>
+                  <textarea name="prompt" rows="3" placeholder="Describe the character..."></textarea>
+                </label>
+                <label class="make-seed-field">
+                  <span class="label-text">Seed</span>
+                  <div class="input-group">
+                    <input type="number" name="seed" placeholder="Seed">
+                    <button type="button" class="btn btn-secondary btn-icon" id="random-seed-btn" title="Randomize">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 8h.01"></path>
+                        <path d="M8 8h.01"></path>
+                        <path d="M8 16h.01"></path>
+                        <path d="M16 16h.01"></path>
+                        <path d="M12 12h.01"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </label>
+                <label class="make-seed-field">
+                  <span class="label-text">Upscale Seed</span>
+                  <div class="input-group">
+                    <input type="number" name="upscaleSeed" placeholder="Seed">
+                    <button type="button" class="btn btn-secondary btn-icon" id="random-upscale-seed-btn"
+                      title="Randomize">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 8h.01"></path>
+                        <path d="M8 8h.01"></path>
+                        <path d="M8 16h.01"></path>
+                        <path d="M16 16h.01"></path>
+                        <path d="M12 12h.01"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </label>
+                <label class="make-lora-field">
+                  <span class="label-text">Model (Checkpoint)</span>
+                  <select name="model" id="make-model" class="input-select"></select>
+                </label>
+                <label class="make-lora-field">
+                  <span class="label-text">LoRA</span>
+                  <select name="lora" id="make-lora" class="input-select"></select>
+                </label>
+              </div>
+              <div class="make-settings-column">
+                <div class="make-settings-panels">
+                  <div class="editor-panel">
+                    <h3 class="panel-title">Orientation & Transform</h3>
+                    <div class="setting-item">
+                      <span class="label-text">Orientation</span>
+                      <div class="segmented-control">
+                        <label class="segment">
+                          <input type="radio" name="orientation" value="portrait" checked>
+                          <span class="segment-label">Portrait</span>
+                        </label>
+                        <label class="segment">
+                          <input type="radio" name="orientation" value="landscape">
+                          <span class="segment-label">Landscape</span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="transform-row">
+                      <button type="button" class="btn btn-secondary btn-toggle btn-small" id="make-flip-x-btn"
+                        title="Flip Horizontal">Flip X</button>
+                      <button type="button" class="btn btn-secondary btn-toggle btn-small" id="make-flip-y-btn"
+                        title="Flip Vertical">Flip Y</button>
+                      <select id="make-rotation-select" class="input-select input-select-small">
+                        <option value="0">0°</option>
+                        <option value="90">90°</option>
+                        <option value="180">180°</option>
+                        <option value="270">270°</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="editor-panel">
+                    <h3 class="panel-title">Character Size</h3>
+                    <div class="setting-item">
+                      <div class="segmented-control">
+                        <label class="segment">
+                          <input type="radio" name="size" value="small">
+                          <span class="segment-label">Small</span>
+                        </label>
+                        <label class="segment">
+                          <input type="radio" name="size" value="medium">
+                          <span class="segment-label">Medium</span>
+                        </label>
+                        <label class="segment">
+                          <input type="radio" name="size" value="large" checked>
+                          <span class="segment-label">Large</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="editor-panel">
+                    <h3 class="panel-title">Background</h3>
+                    <div class="setting-item">
+                      <div class="color-picker-row">
+                        <div class="segmented-control segmented-control-small">
+                          <label class="segment">
+                            <input type="radio" name="make-bg" value="transparent">
+                            <span class="segment-label">Transparent</span>
+                          </label>
+                          <label class="segment">
+                            <input type="radio" name="make-bg" value="solid" checked>
+                            <span class="segment-label">Solid</span>
+                          </label>
+                        </div>
+                        <div class="color-picker-container">
+                          <input type="color" name="backgroundColor" id="background-color-input" value="#000000">
+                          <span class="color-value" id="background-color-value">#000000</span>
+                        </div>
+                      </div>
+                      <div class="rmbg-group">
+                        <button type="button" class="btn btn-secondary btn-small" id="remove-background-btn"
+                          title="Remove background">RMBG</button>
+                        <button type="button" class="btn btn-secondary btn-small" id="restore-before-rmbg-btn"
+                          title="Revert" aria-label="Revert">↩</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel-actions modal-actions">
+                  <button type="button" class="btn btn-primary" id="generate-btn">Generate</button>
+                  <button type="submit" class="btn btn-primary" id="save-btn" disabled>Save</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+    <section id="edit-tab" class="tab-panel">
+      <div id="edit-rows" class="edit-rows"></div>
+      <div class="full-page-panel hidden" id="edit-detail-view">
+        <div class="panel-header">
+          <button type="button" class="btn btn-ghost btn-icon" id="edit-back" title="Back" aria-label="Back">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 12H5" />
+              <path d="M12 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <h2 class="panel-title" id="edit-panel-title">Edit</h2>
+        </div>
+        <form id="edit-form" class="panel-form modal-form">
+          <input type="hidden" id="edit-sprite-id">
+          <input type="hidden" id="edit-edit-id">
+          <input type="hidden" id="edit-original-name">
+          <div class="edit-layout">
+            <div class="edit-preview-section">
+              <div class="image-placeholder" id="edit-preview-placeholder"><span>Preview</span></div>
+            </div>
+            <div class="edit-bottom-section">
+              <div class="edit-form-inputs">
+                <h3 class="form-section-title">Edit</h3>
+                <div class="edit-row-compact">
+                  <label class="edit-source-field">
+                    <span class="label-text">Source</span>
+                    <select id="edit-source-image" class="input-select">
+                      <option value="">—</option>
+                    </select>
+                  </label>
+                  <label class="edit-name-field edit-name-row">
+                    <span class="label-text">Name</span>
+                    <input type="text" id="edit-name" placeholder="e.g. walking" required>
+                  </label>
+                </div>
+                <label>
+                  <span class="label-text">Prompt</span>
+                  <textarea id="edit-prompt" rows="2" placeholder="e.g. make the character walking"></textarea>
+                </label>
+                <label class="edit-seed-field">
+                  <span class="label-text">Seed</span>
+                  <div class="input-group">
+                    <input type="number" id="edit-seed" placeholder="Seed">
+                    <button type="button" class="btn btn-secondary btn-icon" id="edit-random-seed" title="Randomize">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 8h.01"></path>
+                        <path d="M8 8h.01"></path>
+                        <path d="M8 16h.01"></path>
+                        <path d="M16 16h.01"></path>
+                        <path d="M12 12h.01"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </label>
+                <label class="edit-lora-field">
+                  <span class="label-text">Model</span>
+                  <select id="edit-model" class="input-select"></select>
+                </label>
+                <label class="edit-lora-field">
+                  <span class="label-text">Lora</span>
+                  <select id="edit-lora" class="input-select"></select>
+                </label>
+              </div>
+              <div class="edit-settings-column">
+                <div class="edit-settings-panels">
+                  <div class="editor-panel">
+                    <h3 class="panel-title">Source Overlay</h3>
+                    <div class="setting-item overlay-slider-container">
+                      <span class="label-text">Opacity</span>
+                      <div class="overlay-slider-row">
+                        <output id="edit-overlay-value" class="overlay-percent" for="edit-overlay-slider">0</output>
+                        <span class="overlay-percent-suffix">%</span>
+                        <input type="range" id="edit-overlay-slider" min="0" max="100" value="0" step="1">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="editor-panel">
+                    <h3 class="panel-title">Transform</h3>
+                    <div class="transform-row">
+                      <button type="button" class="btn btn-secondary btn-toggle btn-small" id="edit-flip-x-btn"
+                        title="Flip Horizontal">Flip X</button>
+                      <button type="button" class="btn btn-secondary btn-toggle btn-small" id="edit-flip-y-btn"
+                        title="Flip Vertical">Flip Y</button>
+                      <select id="edit-rotation-select" class="input-select input-select-small">
+                        <option value="0">0°</option>
+                        <option value="90">90°</option>
+                        <option value="180">180°</option>
+                        <option value="270">270°</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="editor-panel">
+                    <h3 class="panel-title">Background</h3>
+                    <div class="setting-item">
+                      <div class="color-picker-row">
+                        <div class="segmented-control segmented-control-small">
+                          <label class="segment">
+                            <input type="radio" name="edit-bg" value="transparent">
+                            <span class="segment-label">Transparent</span>
+                          </label>
+                          <label class="segment">
+                            <input type="radio" name="edit-bg" value="solid" checked>
+                            <span class="segment-label">Solid</span>
+                          </label>
+                        </div>
+                        <div class="color-picker-container">
+                          <input type="color" id="edit-background-color" value="#000000">
+                          <span class="color-value" id="edit-background-color-value">#000000</span>
+                        </div>
+                      </div>
+                      <div class="rmbg-group">
+                        <button type="button" class="btn btn-secondary btn-small" id="edit-remove-background-btn"
+                          title="RMBG">RMBG</button>
+                        <button type="button" class="btn btn-secondary btn-small" id="edit-restore-before-rmbg-btn"
+                          title="Revert">↩</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="editor-panel">
+                    <h3 class="panel-title">Filters</h3>
+                    <div class="filter-slider">
+                      <span class="filter-label">Brightness</span>
+                      <input type="range" id="edit-filter-brightness" min="-100" max="100" value="0">
+                      <output id="edit-filter-brightness-value">0</output>
+                    </div>
+                    <div class="filter-slider">
+                      <span class="filter-label">Contrast</span>
+                      <input type="range" id="edit-filter-contrast" min="-100" max="100" value="0">
+                      <output id="edit-filter-contrast-value">0</output>
+                    </div>
+                    <div class="filter-slider">
+                      <span class="filter-label">Saturation</span>
+                      <input type="range" id="edit-filter-saturation" min="-100" max="100" value="0">
+                      <output id="edit-filter-saturation-value">0</output>
+                    </div>
+                    <div class="filter-slider">
+                      <span class="filter-label">Hue</span>
+                      <input type="range" id="edit-filter-hue" min="-180" max="180" value="0">
+                      <output id="edit-filter-hue-value">0</output><span>°</span>
+                    </div>
+                    <div class="filter-slider">
+                      <span class="filter-label">Zoom</span>
+                      <input type="range" id="edit-zoom-slider" min="50" max="200" value="100">
+                      <output id="edit-zoom-value">100</output><span>%</span>
+                    </div>
+                    <div class="filter-actions">
+                      <button type="button" class="btn btn-secondary btn-small btn-toggle" id="edit-pan-toggle"
+                        title="Pan">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                          stroke="currentColor" stroke-width="2">
+                          <path d="M5 9l-3 3 3 3"></path>
+                          <path d="M9 5l3 3-3 3"></path>
+                          <path d="M15 9l3 3-3 3"></path>
+                          <path d="M19 5l-3 3 3 3"></path>
+                        </svg>
+                        Pan
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel-actions modal-actions">
+                  <button type="button" class="btn btn-secondary" id="edit-reset-all-btn">Reset</button>
+                  <button type="button" class="btn btn-primary" id="edit-generate-btn">Generate</button>
+                  <button type="button" class="btn btn-primary" id="edit-save-btn" disabled>Save</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+    <section id="animate-tab" class="tab-panel">
+      <div id="animate-list" class="animate-list"></div>
+      <div class="full-page-panel hidden" id="animate-detail-view">
+        <div class="panel-header">
+          <button type="button" class="btn btn-ghost btn-icon" id="animate-back" title="Back" aria-label="Back">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 12H5" />
+              <path d="M12 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <h2 class="panel-title" id="animate-panel-title">Animate</h2>
+        </div>
+        <form id="animate-form" class="panel-form modal-form animate-form">
+          <div class="animate-layout layout-portrait" id="animate-layout">
+            <div class="animate-preview-section">
+              <div class="image-placeholder" id="animate-preview-placeholder"><span>768 × 1280</span></div>
+            </div>
+            <div class="animate-bottom-section">
+              <div class="animate-picker-section">
+                <p class="animate-select-hint">Select image to animate</p>
+                <div id="animate-image-picker" class="animate-image-picker"></div>
+              </div>
+              <div class="animate-settings-column">
+                <div class="animate-settings-panels">
+                  <div class="editor-panel">
+                    <h3 class="panel-title">Animation</h3>
+                    <label>
+                      <span class="label-text">Animation name</span>
+                      <input type="text" id="animate-name" placeholder="e.g. walking" maxlength="120">
+                    </label>
+                    <label>
+                      <span class="label-text">Prompt</span>
+                      <textarea id="animate-prompt" rows="2" placeholder="e.g. walking forward"></textarea>
+                    </label>
+                  </div>
+                  <div class="editor-panel">
+                    <h3 class="panel-title">Model (WAN)</h3>
+                    <div class="animate-row-compact">
+                      <label class="animate-lora-field">
+                        <span class="label-text">High noise model</span>
+                        <select id="animate-model-high" class="input-select"></select>
+                      </label>
+                      <label class="animate-lora-field">
+                        <span class="label-text">Low noise model</span>
+                        <select id="animate-model-low" class="input-select"></select>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="editor-panel">
+                    <h3 class="panel-title">LoRA</h3>
+                    <div class="animate-row-compact">
+                      <label class="animate-lora-field">
+                        <span class="label-text">High LoRA</span>
+                        <select id="animate-lora-high" class="input-select">
+                          <option value="">None</option>
+                        </select>
+                      </label>
+                      <label class="animate-lora-field">
+                        <span class="label-text">Low LoRA</span>
+                        <select id="animate-lora-low" class="input-select">
+                          <option value="">None</option>
+                        </select>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="editor-panel">
+                    <h3 class="panel-title">Playback</h3>
+                    <div class="animate-row-compact">
+                      <label class="animate-frames-field">
+                        <span class="label-text">Frames <output id="animate-length-value"
+                            for="animate-length">81</output></span>
+                        <input type="range" id="animate-length" min="17" max="113" step="16" value="81">
+                      </label>
+                      <label class="animate-fps-field">
+                        <span class="label-text">FPS</span>
+                        <input type="number" id="animate-fps" min="1" max="60" value="16" step="1">
+                      </label>
+                    </div>
+                    <label>
+                      <span class="label-text">Seed</span>
+                      <div class="input-group">
+                        <input type="number" id="animate-seed" placeholder="Seed">
+                        <button type="button" class="btn btn-secondary btn-icon" id="animate-random-seed"
+                          title="Randomize">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 8h.01"></path>
+                            <path d="M8 8h.01"></path>
+                            <path d="M8 16h.01"></path>
+                            <path d="M16 16h.01"></path>
+                            <path d="M12 12h.01"></path>
+                          </svg>
+                        </button>
+                      </div>
+                    </label>
+                    <div class="animate-checkboxes">
+                      <label class="checkbox-label">
+                        <input type="checkbox" id="animate-same-first-last">
+                        <span class="label-text">Same first/last</span>
+                      </label>
+                      <label class="checkbox-label">
+                        <input type="checkbox" id="animate-ping-pong">
+                        <span class="label-text">Ping Pong</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel-actions modal-actions">
+                  <button type="submit" class="btn btn-primary" id="animate-generate-btn" disabled>Generate</button>
+                  <button type="button" class="btn btn-primary" id="animate-save-video-btn" disabled>Save</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+    <section id="videos-tab" class="tab-panel">
+      <div id="videos-list" class="videos-list"></div>
+      <div id="frame-editor" class="frame-editor" style="display: none;"></div>
+    </section>
+    <section id="settings-tab" class="tab-panel settings-tab-centered">
+      <div class="settings-panel">
+        <h2 class="settings-title-main">Settings</h2>
+        <p class="settings-description">Configure defaults and prompts. Saved to <code>data/config.json</code>.</p>
+        <form id="settings-form" class="settings-form">
+          <div class="editor-panel">
+            <h3 class="panel-title">Defaults</h3>
+            <label>
+              <span class="label-text">Default character type</span>
+              <select id="settings-default-sprite-type" class="input-select">
+                <option value="character">Character</option>
+              </select>
+            </label>
+            <label>
+              <span class="label-text">Default gender</span>
+              <select id="settings-default-gender" class="input-select">
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+              </select>
+            </label>
+            <label>
+              <span class="label-text">Default background color</span>
+              <div class="color-picker-row">
+                <input type="color" id="settings-bg-color" value="#000000">
+                <input type="text" id="settings-bg-color-text" class="input-text-inline" value="#000000" placeholder="#000000">
+              </div>
+            </label>
+            <label>
+              <span class="label-text">Default size</span>
+              <select id="settings-default-size" class="input-select">
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
+                <option value="large">Large</option>
+              </select>
+            </label>
+            <div class="settings-size-presets">
+              <div class="settings-size-presets-list">
+                <div class="settings-size-row"><span class="settings-size-label">Small:</span><input type="number" id="settings-size-small-w" min="64" max="2048" placeholder="640"><span class="settings-size-times">×</span><input type="number" id="settings-size-small-h" min="64" max="2048" placeholder="1024"></div>
+                <div class="settings-size-row"><span class="settings-size-label">Medium:</span><input type="number" id="settings-size-medium-w" min="64" max="2048" placeholder="704"><span class="settings-size-times">×</span><input type="number" id="settings-size-medium-h" min="64" max="2048" placeholder="1152"></div>
+                <div class="settings-size-row"><span class="settings-size-label">Large:</span><input type="number" id="settings-size-large-w" min="64" max="2048" placeholder="768"><span class="settings-size-times">×</span><input type="number" id="settings-size-large-h" min="64" max="2048" placeholder="1280"></div>
+              </div>
+            </div>
+          </div>
+          <div class="editor-panel">
+            <h3 class="panel-title">Prompt defaults</h3>
+            <label>
+              <span class="label-text">Default prompt tags (character)</span>
+              <textarea id="settings-prompt-tags" rows="2" placeholder="e.g. standing, full_body..."></textarea>
+            </label>
+            <label>
+              <span class="label-text">Default prompt tags (object)</span>
+              <textarea id="settings-prompt-tags-object" rows="2" placeholder="e.g. no_humans, simple_background..."></textarea>
+            </label>
+            <label>
+              <span class="label-text">Default negative prompt</span>
+              <textarea id="settings-negative-prompt" rows="2" placeholder="e.g. lowres, bad anatomy..."></textarea>
+            </label>
+            <label>
+              <span class="label-text">Gender prompt (male)</span>
+              <input type="text" id="settings-gender-prompt-male" placeholder="e.g. solo, 1boy">
+            </label>
+            <label>
+              <span class="label-text">Gender prompt (female)</span>
+              <input type="text" id="settings-gender-prompt-female" placeholder="e.g. solo, 1girl">
+            </label>
+          </div>
+          <div class="panel-actions modal-actions">
+            <button type="submit" class="btn btn-primary" id="settings-save-btn">Save config</button>
+            <button type="button" class="btn btn-secondary" id="settings-reboot-btn" title="Reload models &amp; LoRAs from ComfyUI">Reboot</button>
+            <span id="settings-status" class="settings-status"></span>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+
+</html>

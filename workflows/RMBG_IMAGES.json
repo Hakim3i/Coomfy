@@ -1,0 +1,48 @@
+{
+  "2": {
+    "inputs": {
+      "model": "RMBG-2.0",
+      "sensitivity": 1,
+      "process_res": 1280,
+      "mask_blur": 0,
+      "mask_offset": 0,
+      "invert_output": false,
+      "refine_foreground": true,
+      "background": "Alpha",
+      "background_color": "#000000",
+      "image": [
+        "19",
+        0
+      ]
+    },
+    "class_type": "RMBG",
+    "_meta": {
+      "title": "Remove Background (RMBG)"
+    }
+  },
+  "18": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "2",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "19": {
+    "inputs": {
+      "directory": "C:\\temp_folder",
+      "image_load_cap": 0,
+      "skip_first_images": 0,
+      "select_every_nth": 1
+    },
+    "class_type": "VHS_LoadImagesPath",
+    "_meta": {
+      "title": "Load Images (Path) 🎥🅥🅗🅢"
+    }
+  }
+}
