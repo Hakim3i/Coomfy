@@ -130,6 +130,7 @@ git reset --hard "origin/${BRANCH}"
 echo "==> Ensuring required ComfyUI custom nodes"
 install_or_update_custom_node "https://github.com/Smirnov75/ComfyUI-mxToolkit.git" "ComfyUI-mxToolkit"
 install_or_update_custom_node "https://github.com/pythongosssss/ComfyUI-Custom-Scripts.git" "ComfyUI-Custom-Scripts"
+install_or_update_custom_node "https://github.com/receyuki/comfyui-prompt-reader-node.git" "comfyui-prompt-reader-node"
 if [ "${CUSTOM_NODES_CHANGED}" -eq 1 ]; then
   echo "==> Custom nodes were installed/updated."
   echo "==> Please restart ComfyUI to load node changes."

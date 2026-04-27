@@ -49,6 +49,7 @@ Behavior on every run
 - Ensures required ComfyUI custom nodes are installed/updated in `/workspace/ComfyUI/custom_nodes`:
   - `ComfyUI-mxToolkit` (for `mxSlider`)
   - `ComfyUI-Custom-Scripts` (for `MathExpression|pysssss` and `SDAnyConverter`)
+  - `comfyui-prompt-reader-node`
 - If any custom node repo was cloned or updated, the script will ask you to restart ComfyUI.
 
 
