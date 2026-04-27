@@ -13,7 +13,7 @@ Examples:
 Priority for COMFY_URL:
   1) First CLI argument
   2) COMFY_URL environment variable
-  3) Default: http://127.0.0.1:8190
+  3) Default: http://127.0.0.1:8188
 EOF
 }
 
@@ -29,7 +29,7 @@ REPO_URL="${REPO_URL:-https://github.com/Hakim3i/Coomfy.git}"
 REPO_DIR="${REPO_DIR:-/workspace/Coomfy}"
 BRANCH="${BRANCH:-main}"
 APP_PORT="${APP_PORT:-8190}"
-COMFY_URL="${1:-${COMFY_URL:-http://127.0.0.1:8190}}"
+COMFY_URL="${1:-${COMFY_URL:-http://127.0.0.1:8188}}"
 
 echo "==> Coomfy Runpod setup starting"
 echo "    REPO_URL:  ${REPO_URL}"

@@ -33,7 +33,7 @@ Then open: `http://localhost:8190`
 ## Requirements
 
 - Node.js 18+ (recommended)
-- A running ComfyUI instance (default expected endpoint: `127.0.0.1:8190`)
+- A running ComfyUI instance (default expected endpoint: `127.0.0.1:8188`)
 
 ## Notes
 
