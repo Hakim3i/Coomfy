@@ -30,6 +30,8 @@ REPO_DIR="${REPO_DIR:-/workspace/Coomfy}"
 BRANCH="${BRANCH:-main}"
 APP_PORT="${APP_PORT:-8190}"
 COMFY_URL="${1:-${COMFY_URL:-http://127.0.0.1:8188}}"
+COMFYUI_DIR="${COMFYUI_DIR:-/workspace/ComfyUI}"
+CUSTOM_NODES_DIR="${CUSTOM_NODES_DIR:-${COMFYUI_DIR}/custom_nodes}"
 
 echo "==> Coomfy Runpod setup starting"
 echo "    REPO_URL:  ${REPO_URL}"
@@ -37,6 +39,8 @@ echo "    REPO_DIR:  ${REPO_DIR}"
 echo "    BRANCH:    ${BRANCH}"
 echo "    APP_PORT:  ${APP_PORT}"
 echo "    COMFY_URL: ${COMFY_URL}"
+echo "    COMFYUI_DIR: ${COMFYUI_DIR}"
+echo "    CUSTOM_NODES_DIR: ${CUSTOM_NODES_DIR}"
 
 # -----------------------------
 # Ensure required tools
@@ -62,6 +66,38 @@ fi
 
 echo "==> Node version: $(node -v)"
 echo "==> npm version:  $(npm -v)"
+
+if ! command -v python3 >/dev/null 2>&1; then
+  echo "==> Installing python3 + pip"
+  apt-get update
+  apt-get install -y python3 python3-pip
+fi
+
+echo "==> Python version: $(python3 --version)"
+
+install_or_update_custom_node() {
+  local repo_url="$1"
+  local repo_name="$2"
+  local node_dir="${CUSTOM_NODES_DIR}/${repo_name}"
+
+  if [ ! -d "${CUSTOM_NODES_DIR}" ]; then
+    mkdir -p "${CUSTOM_NODES_DIR}"
+  fi
+
+  if [ ! -d "${node_dir}/.git" ]; then
+    echo "==> Installing custom node: ${repo_name}"
+    git clone --depth 1 "${repo_url}" "${node_dir}"
+  else
+    echo "==> Updating custom node: ${repo_name}"
+    git -C "${node_dir}" fetch --all --prune
+    git -C "${node_dir}" pull --ff-only || true
+  fi
+
+  if [ -f "${node_dir}/requirements.txt" ]; then
+    echo "==> Installing Python requirements for ${repo_name}"
+    python3 -m pip install -r "${node_dir}/requirements.txt"
+  fi
+}
 
 # -----------------------------
 # Stop active Coomfy process (if any)
@@ -91,6 +127,13 @@ echo "==> Forcing latest code from GitHub (${BRANCH})"
 git fetch origin "${BRANCH}" --prune
 git checkout "${BRANCH}"
 git reset --hard "origin/${BRANCH}"
+
+# -----------------------------
+# Install required ComfyUI custom nodes
+# -----------------------------
+echo "==> Ensuring required ComfyUI custom nodes"
+install_or_update_custom_node "https://github.com/Smirnov75/ComfyUI-mxToolkit.git" "ComfyUI-mxToolkit"
+install_or_update_custom_node "https://github.com/pythongosssss/ComfyUI-Custom-Scripts.git" "ComfyUI-Custom-Scripts"
 
 # -----------------------------
 # Install app dependencies

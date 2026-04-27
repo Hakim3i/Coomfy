@@ -25,6 +25,7 @@ Examples:
 
 Optional environment (forwarded to the setup script):
   REPO_URL  REPO_DIR  BRANCH  COMFY_URL (used only when COMFY_URL arg is not given)
+  COMFYUI_DIR  CUSTOM_NODES_DIR
 EOF
 }
 

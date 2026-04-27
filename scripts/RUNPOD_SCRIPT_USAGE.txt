@@ -46,11 +46,19 @@ Behavior on every run
 ---------------------
 - Stops any active Coomfy process (`node server.js`) before updating.
 - Force syncs to latest GitHub `main` (`git reset --hard origin/main`).
+- Ensures required ComfyUI custom nodes are installed/updated in `/workspace/ComfyUI/custom_nodes`:
+  - `ComfyUI-mxToolkit` (for `mxSlider`)
+  - `ComfyUI-Custom-Scripts` (for `MathExpression|pysssss` and `SDAnyConverter`)
+- Installs Python dependencies for those nodes when `requirements.txt` exists.
 
 
 Run with custom ports / settings (example)
 ------------------------------------------
 APP_PORT=8190 COMFY_URL=http://127.0.0.1:8188 ./runpod_setup_coomfy.sh
+
+Override ComfyUI custom nodes location (optional)
+--------------------------------------------------
+COMFYUI_DIR=/workspace/ComfyUI CUSTOM_NODES_DIR=/workspace/ComfyUI/custom_nodes ./runpod_setup_coomfy.sh
 
 
 View logs
